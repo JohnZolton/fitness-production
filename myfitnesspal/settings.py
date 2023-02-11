@@ -27,6 +27,8 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
+CSRF_TRUSTED_ORIGINS=['web-production-8953.up.railway.app']
+
 AUTH_USER_MODEL = "tracking.User" 
 
 # Application definition
