@@ -250,6 +250,7 @@ function search(event) {
             <td>${fats}</td>
             <td>${fiber}</td>
             <td>${cals}</td>
+            <input type='number' value='0'>
             <button id='${data['foods'][i]['fdcId']}'>Add</button>`
 
             document.getElementById("display-table").appendChild(newDiv)
@@ -259,94 +260,93 @@ function search(event) {
     });
 }
 
-function getServing(element){
-    console.log(element)
-}
+
+
 function addfood(){
     let logged_in = document.getElementById("is_logged_in").attributes.value.value
     if (logged_in == "True") {
-    getServing(this)
-    let serving = 100
-    var siblings = n => [...n.parentElement.children].filter(c=>c!=n)
-    let info = siblings(this)
+        var siblings = n => [...n.parentElement.children].filter(c=>c!=n)
+        let info = siblings(this)
 
-    let item = info[0].innerHTML
-    let protein = info[1].innerHTML
-    let carbs = info[3].innerHTML
-    let fats = info[2].innerHTML
-    let cals = info[5].innerHTML
-    let fiber = info[4].innerHTML
-
-    
-    let current_day = new Date(today - tzoffset).toISOString().slice(0, 10)
-    
-    let portion_factor = serving / 100
-    let protein_val = Math.round(protein*portion_factor)
-    let carb_val = Math.round(carbs*portion_factor)
-    let fat_val = Math.round(fats*portion_factor)
-    let fiber_val = Math.round(fiber*portion_factor)
-    let calorie_val = Math.round(cals*portion_factor)
-    let csrf = getcookie('csrftoken');
-    fetch('addfoods', {
-        method: 'POST',
-        headers:{'X-CSRFToken': csrf},
-        body: JSON.stringify({
-            item:item,
-            protein:protein_val,
-            carbs: carb_val,
-            fat: fat_val,
-            fiber: fiber_val,
-            cals: calorie_val,
-            serving:serving,
-            date: current_day 
-        }),
-      })
-      .then(response => response.json())
-      
-      let newDiv = document.createElement("tr");
-      newDiv.innerHTML = `
-      <td class='saved-meal' id='${item}-name' data_original='${item}'>${item}</td>
-      <td class='saved-meal' id='${item}-protein' data_original='${protein_val}'>${protein_val}</td>
-      <td class='saved-meal' id='${item}-carbs' data_original='${carb_val}'>${carb_val}</td>
-      <td class='saved-meal' id='${item}-fats' data_original='${fat_val}'>${fat_val}</td>
-      <td class='saved-meal' id='${item}-fiber' data_original='${fiber_val}'>${fiber_val}</td>
-      <td class='saved-meal' id='${item}-calories' data_original='${calorie_val}'>${calorie_val}</td>
-      <td class='saved-meal' id='${item}-quantity' data_original='${serving}'>${serving}</td>
-      <td>
-        <button id='${item}-edit' class='edit-button' value='${item}'>edit</button>
-        <button id="${item}-save" class="save-button" value="${item}" hidden>save</button>  
-      </td>
-      <td>
-        <button id="${item}-remove" class="remove-button" value="${item}">remove</button>
-      </td>`
-
-      let row = document.getElementById("totals-table").getElementsByTagName('tbody')
-      row[0].appendChild(newDiv)
-
-      let editbuttons = document.querySelectorAll('.edit-button')
-      editbuttons.forEach(child => {
-          child.addEventListener('click', editfoods)
+        let item = info[0].innerHTML
+        let protein = info[1].innerHTML
+        let carbs = info[3].innerHTML
+        let fats = info[2].innerHTML
+        let cals = info[5].innerHTML
+        let fiber = info[4].innerHTML
+        let serving = info[6].innerHTML
+        console.log(info)
+        console.log(serving)
+        
+        let current_day = new Date(today - tzoffset).toISOString().slice(0, 10)
+        
+        let portion_factor = serving / 100
+        let protein_val = Math.round(protein*portion_factor)
+        let carb_val = Math.round(carbs*portion_factor)
+        let fat_val = Math.round(fats*portion_factor)
+        let fiber_val = Math.round(fiber*portion_factor)
+        let calorie_val = Math.round(cals*portion_factor)
+        let csrf = getcookie('csrftoken');
+        fetch('addfoods', {
+            method: 'POST',
+            headers:{'X-CSRFToken': csrf},
+            body: JSON.stringify({
+                item:item,
+                protein:protein_val,
+                carbs: carb_val,
+                fat: fat_val,
+                fiber: fiber_val,
+                cals: calorie_val,
+                serving:serving,
+                date: current_day 
+            }),
         })
-      let savebuttons = document.querySelectorAll('.save-button')
-        savebuttons.forEach(child => {
-            child.addEventListener('click', savechanges)
-          })
-      let removebuttons = document.querySelectorAll('.remove-button')
-          removebuttons.forEach(child => {
-              child.addEventListener('click', removeitem)
+        .then(response => response.json())
+        
+        let newDiv = document.createElement("tr");
+        newDiv.innerHTML = `
+        <td class='saved-meal' id='${item}-name' data_original='${item}'>${item}</td>
+        <td class='saved-meal' id='${item}-protein' data_original='${protein_val}'>${protein_val}</td>
+        <td class='saved-meal' id='${item}-carbs' data_original='${carb_val}'>${carb_val}</td>
+        <td class='saved-meal' id='${item}-fats' data_original='${fat_val}'>${fat_val}</td>
+        <td class='saved-meal' id='${item}-fiber' data_original='${fiber_val}'>${fiber_val}</td>
+        <td class='saved-meal' id='${item}-calories' data_original='${calorie_val}'>${calorie_val}</td>
+        <td class='saved-meal' id='${item}-quantity' data_original='${serving}'>${serving}</td>
+        <td>
+            <button id='${item}-edit' class='edit-button' value='${item}'>edit</button>
+            <button id="${item}-save" class="save-button" value="${item}" hidden>save</button>  
+        </td>
+        <td>
+            <button id="${item}-remove" class="remove-button" value="${item}">remove</button>
+        </td>`
+
+        let row = document.getElementById("totals-table").getElementsByTagName('tbody')
+        row[0].appendChild(newDiv)
+
+        let editbuttons = document.querySelectorAll('.edit-button')
+        editbuttons.forEach(child => {
+            child.addEventListener('click', editfoods)
             })
-      
-      let new_total_protein = parseInt(protein_val)
-      let new_total_carb = parseInt(carb_val)
-      let new_total_fat = parseInt(fat_val)
-      let new_total_fiber = parseInt(fiber_val)
-      let new_total_cals = parseInt(calorie_val)
-  
-    updatetotals(new_total_protein, new_total_carb, new_total_fat, new_total_fiber, new_total_cals)
+        let savebuttons = document.querySelectorAll('.save-button')
+            savebuttons.forEach(child => {
+                child.addEventListener('click', savechanges)
+            })
+        let removebuttons = document.querySelectorAll('.remove-button')
+            removebuttons.forEach(child => {
+                child.addEventListener('click', removeitem)
+                })
+        
+        let new_total_protein = parseInt(protein_val)
+        let new_total_carb = parseInt(carb_val)
+        let new_total_fat = parseInt(fat_val)
+        let new_total_fiber = parseInt(fiber_val)
+        let new_total_cals = parseInt(calorie_val)
     
-    hideresults(document.getElementById('display-table'))
-    document.getElementById('display-table').style.display = 'none'
-    document.getElementById('food').value = ''
+        updatetotals(new_total_protein, new_total_carb, new_total_fat, new_total_fiber, new_total_cals)
+        
+        hideresults(document.getElementById('display-table'))
+        document.getElementById('display-table').style.display = 'none'
+        document.getElementById('food').value = ''
     } else {alert("please create an account or sign in")}
 }
 

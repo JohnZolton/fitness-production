@@ -237,3 +237,6 @@ button:hover{
   background-color: var(--buttoncolorhover);
 }
 
+.result_serving {
+  width: 75px;
+}
