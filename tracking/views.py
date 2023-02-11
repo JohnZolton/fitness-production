@@ -382,7 +382,7 @@ def checkout(request):
     return render(request, 'tracking/checkout.html')
 
 def create_checkout_session(request):
-    YOUR_DOMAIN = 'https://web-production-8953.up.railway.app'
+    YOUR_DOMAIN = 'https://web-production-8953.up.railway.app/tracking'
     try:
         checkout_session = stripe.checkout.Session.create(
             client_reference_id = request.user.id if request.user.is_authenticated else None,
