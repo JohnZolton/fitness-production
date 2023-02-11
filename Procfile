@@ -1,0 +1,1 @@
+web: gunicorn myfitnesspal.wsgi --log-file -

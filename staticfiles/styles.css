@@ -1,0 +1,239 @@
+.darkmode{
+  --backgroundcolor: #000000;
+  --textcolor: white;
+  --bordercolor: gray;
+  --secondarybackground: #1d1b20;
+  --highlightcolor: #58505f;
+  --selectedcolor: #757575;
+  --buttoncolor: #802447;
+  --buttoncolorhover: #f85d98;
+}
+.lightmode{
+  --backgroundcolor: #FFE15D;
+  --textcolor: rgb(0, 0, 0);
+  --bordercolor: #F49D1A;
+  --secondarybackground: #F49D1A;
+  --highlightcolor: #DC3535;
+  --selectedcolor: #757575;
+  --buttoncolor: #B01E68;
+  --buttoncolorhover: #b6487f;
+}
+* { box-sizing: border-box; }
+body {
+  font: 16px Arial;
+  background-color: var(--backgroundcolor);
+  color: var(--textcolor);
+}
+.autocomplete {
+  /*the container must be positioned relative:*/
+  position: relative;
+  display: inline-block;
+}
+input {
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 16px;
+  margin: 5px;
+  background-color: var(--secondarybackground);
+  color: var(--textcolor);
+}
+input[type=text] {
+  background-color: var(--highlightcolor);
+  width: 400px;
+  color: var(--textcolor);
+  margin-bottom: 10px;
+}
+input:focus{
+  background-color: var(--selectedcolor);
+  border: none;
+}
+
+input:hover{
+  background-color: var(--selectedcolor);
+}
+input[type=submit] {
+  color: var(--textcolor);
+}
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: var(--secondarybackground);
+  border-bottom: 1px solid #d4d4d4;
+}
+.autocomplete-items div:hover {
+  /*when hovering an item:*/
+  background-color: var(--selectedcolor);
+}
+
+
+.flex-container {
+  display: flex ;
+  flex-direction: row;
+  flex: 1 2 200px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.flex-child {
+    width: 100%;
+    max-width: 500px;
+    min-width: 250px;
+    margin: 10px; 
+}
+
+canvas {
+  background: var(--secondarybackground);
+  margin-bottom: 20px;
+  border-radius: 10px;
+  color: var(--textcolor);
+  max-width: 500px;
+}
+table {
+  background-color: var(--secondarybackground);
+  padding: 10px;
+  border-radius: 10px;
+  overflow: hidden;
+  border-collapse: collapse;
+}
+th{
+  padding-left: 8px;
+  padding-right: 8px
+}
+tr{
+  margin: 10px;
+  padding: 10px;
+  border-bottom: 1px solid black;
+  margin-right: 20px;
+  overflow: hidden;
+}
+td{
+  padding:5px;
+  padding-left: 10px;
+}
+tbody tr:nth-child(odd) {
+  background-color: var(--secondarybackground);
+}
+
+tbody tr:nth-child(even) {
+  background-color: var(--highlightcolor);
+}
+
+tbody tr:hover {
+  background-color: var(--selectedcolor);
+}
+tbody tr:nth-child(1){
+  border-radius: 10px;
+}
+
+tbody tr:last-child {
+  border: none
+}
+
+.toolbar {
+  display: flex;
+  width: 100%;
+  border-radius: 10px;
+  background-color: var(--secondarybackground);
+  overflow: hidden;
+}
+.toolbar-item {
+  display: block;
+  width: 100%;
+  height:100%;
+  padding: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: fit-content;
+}
+.toolbar-item:hover{
+  background-color: var(--highlightcolor)
+}
+.toolbar-date{
+  padding: 16px;
+  padding-top: 18px;
+}
+
+.table-bar {
+  display: grid;
+  grid-template-columns:  auto 150px;
+  width: 100%;
+  background-color: var(--secondarybackground);
+  padding-left: 20px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.table-swap {
+  padding-top: 7px;
+}
+
+.table-copy {
+  justify-self: right;
+}
+.table-date-container{
+  grid-template-columns: auto auto auto;
+}
+
+.totals-container{
+  background-color: var(--secondarybackground);
+  border-radius: 10px;
+  margin-top:10px;
+  width: fit-content;
+}
+
+.totals-child {
+  display: flex;
+  padding:5px;
+  padding-left:15px;
+  padding-right:15px;
+}
+.totals-item {
+  padding-left: 15px;
+}
+
+a{
+  color: var(--textcolor);
+  text-decoration: none;
+}
+.add-foods-container{
+  background-color: var(--secondarybackground);
+  width: fit-content;
+  margin-top: 10px;
+  border-radius: 10px;
+  padding-left: 10px;
+  
+}
+.add-header{
+  font-size: large;
+  padding: 5px;
+}
+
+button {
+  border: none;
+  padding: 5px;
+  color: var(--textcolor);
+  background: var(--buttoncolor);
+  border-radius: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: 4px;
+  margin-bottom: 5px;
+}
+button:hover{
+  cursor:pointer;
+  background-color: var(--buttoncolorhover);
+}
+

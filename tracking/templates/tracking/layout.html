@@ -1,0 +1,51 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" class="darkmode">
+    <head>
+        <title class="center">{% block title %}Tracking{% endblock %}</title>
+        <link href="{% static 'styles.css' %}" rel="stylesheet">
+
+        {% block script %}
+        <script type = 'text/javascript' src="{% static 'background.js' %}"></script>
+        {% endblock %}
+    </head>
+    <body>
+        <h1>Fitness Tracking</h1>
+
+        <div class="flex-container">
+        <div class="toolbar">
+            <div class="toolbar-item">
+
+                <a href="{% url 'index' %}">Home</a>
+            </div>
+            {% if user.is_authenticated %}
+            <div class="toolbar-item">
+                <a href="{% url 'settings' %}">Settings</a>
+            </div>
+            <div class="toolbar-item">
+            {% if user.is_subscribed %}
+                <a href="{% url 'managesubscription' %}">Manage Subscription</a>
+            {% else %}
+                <a href="{% url 'checkout' %}">Upgrade to Premium</a>
+            {% endif %}
+            </div>
+            <div class="toolbar-item">
+                <a href="{% url 'logout' %}">Logout</a>
+            </div>
+            {% else %}
+            <div class="toolbar-item">
+                <a href="{% url 'login' %}">Login</a>
+            </div>
+
+            <div class="toolbar-item">
+                <a href="{% url 'register' %}">Register</a>
+            </div>
+            {% endif %}
+
+        <button id="switch" onclick="changetheme()">&#x263C</button>
+        </div></div>
+            {% block body %}
+            {% endblock %}
+    </body>
+</html>

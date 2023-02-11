@@ -1,0 +1,80 @@
+{% extends "tracking/layout.html" %}
+
+{% block body %}
+
+<div style="margin: 20px;">
+    <h2>Settings</h2>
+    {% if user.is_authenticated %}
+        <h3>Nutrition Goals</h3>
+        <form action="{% url 'settings' %}" method="POST">
+            {% csrf_token %}
+            <div>
+                <label>Protein</label>
+                <input type="number" id='protein' name="protein" value="{{protein}}"> </div>
+            <div>
+                <label>Carbs</label>
+                <input type="number" id="carb" name="carb" value="{{carb}}">
+            </div>
+            <div>
+            <div>
+                <label>Fats</label>
+                <input type="number" id="fat" name="fat" value="{{fat}}">
+            </div>
+                <label>Fiber</label>
+                <input type="number" id="fiber" name="fiber" value="{{fiber}}">
+            </div>
+            <input type="hidden" id="true-calories" name="true-calories" value="{{cals}}">
+            <div id="calories" data-value="{{cals}}">Calories: {{cals}}</div>
+            <button type="submit">Save</button>
+        </form>
+        <h3>Step Tracking</h3>
+        <div>This only works for Garmin smart watches</div>
+        <form action="{% url 'steps' %}" method="post">
+            {% csrf_token %}
+            <div>
+                <label>Garmin email:</label>
+                <input type="email" placeholder="" name="email">
+            </div>
+            <div>
+              <label>Garmin password:</label>
+            <input type="password" placeholder="" name="password"> 
+            </div>
+            <div>
+               <label>Until how many days ago?</label>
+            <input type="number" name="days"> 
+            </div>
+            {% if autostep %}
+            <label for="copyprev">Disable automatic updates</label>
+            <input type="checkbox" name="disable">
+            {% else %}
+            <label for="copyprev">Enable automatic updates</label>
+            <input type="checkbox" name="enable">
+            {% endif %}
+            <div>
+                <button type="submit">Save</button>
+            </div>
+        </form>
+        <h3>Nutrition Tracking</h3>
+        {% if not autocopy %}
+        <form action = "{% url 'enablecopyprevious' %}" method="post">
+            {% csrf_token %}
+            <label for="copyprev">Automatically copy previous day</label>
+            <input type="checkbox" name="enable">
+            <button type="submit">Save</button>
+        </form>
+        {% else %}
+        <form action = "{% url 'disablecopyprevious' %}" method="post">
+            {% csrf_token %}
+            <label for="copyprev">Disable autocopy previous day</label>
+            <input type="checkbox" name="disable">
+            <button type="submit">Save</button>
+        </form>
+        {% endif %}
+
+    {% else %}
+    <div>Sign in</div>
+    {% endif %}
+</div> 
+    {% load static %}
+    <script type = 'text/javascript' src="{% static 'settings.js' %}"></script>
+{% endblock %}
