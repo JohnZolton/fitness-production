@@ -75,7 +75,7 @@
         <div>Upgrade to Premium</div>
         <form action = "{% url 'disablecopyprevious' %}" method="post">
             {% csrf_token %}
-            <label for="copyprev">Disable autocopy previous day</label>
+            <label for="copyprev">Automatically copy previous day</label>
             <input type="checkbox" name="enable" disabled>
             <button type="submit">Save</button>
         </form>
