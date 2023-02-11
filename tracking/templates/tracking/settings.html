@@ -55,6 +55,7 @@
             </div>
         </form>
         <h3>Nutrition Tracking</h3>
+        {% if user.is_subscribed %}
         {% if not autocopy %}
         <form action = "{% url 'enablecopyprevious' %}" method="post">
             {% csrf_token %}
@@ -63,21 +64,21 @@
             <button type="submit">Save</button>
         </form>
         {% else %}
-        {% if user.is_subscribed %}
         <form action = "{% url 'disablecopyprevious' %}" method="post">
             {% csrf_token %}
             <label for="copyprev">Disable autocopy previous day</label>
             <input type="checkbox" name="disable">
             <button type="submit">Save</button>
         </form>
+        {% endif %}
         {% else %}
+        <div>Upgrade to Premium</div>
         <form action = "{% url 'disablecopyprevious' %}" method="post">
             {% csrf_token %}
             <label for="copyprev">Disable autocopy previous day</label>
             <input type="checkbox" name="enable" disabled>
             <button type="submit">Save</button>
         </form>
-        {% endif %}
         {% endif %}
 
     {% else %}
