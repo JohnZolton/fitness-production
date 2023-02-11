@@ -451,7 +451,7 @@ def managesubscription(request):
 def create_portal_session(request):
     if request.method == 'POST':
         user = User.objects.get(id=request.user.id)
-        return_url = "http://127.0.0.1:8000/tracking/manage"
+        return_url = "https://web-production-8953.up.railway.app/tracking/manage"
         checkout_session = stripe.checkout.Session.retrieve(user.checkout_id)
         portalSession = stripe.billing_portal.Session.create(
             customer = checkout_session.customer,
