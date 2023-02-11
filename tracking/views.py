@@ -115,7 +115,7 @@ def index(request):
             metric.save()
 
         join_date = cur_user.date_joined
-        metrics = Metrics.objects.filter(account=cur_user).filter(date__range=[join_date, yesterday]).order_by('date')
+        metrics = Metrics.objects.filter(account=cur_user).filter(date__range=[join_date, datetime.date.today()]).order_by('date')
         message = ""
         dates, bodyweight_data, steps, calories = [],[],[],[]
         for day in metrics:
@@ -136,7 +136,7 @@ def index(request):
             stepsize = (max_bodyweight-min_bodyweight)/6
         else:
             min_bodyweight = 0
-            max_bodyweight = 0
+            max_bodyweight = 1
             stepsize = 1
     else:
         bodyweight = None
