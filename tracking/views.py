@@ -130,10 +130,14 @@ def index(request):
             else:
                 bodyweight_data.append(0)
             calories.append(day.calories)
-
-        min_bodyweight = min(bodyweight_data)-1
-        max_bodyweight = max(bodyweight_data) + 1
-        stepsize = (max_bodyweight-min_bodyweight)/6
+        if bodyweight_data: 
+            min_bodyweight = min(bodyweight_data)-1
+            max_bodyweight = max(bodyweight_data) + 1
+            stepsize = (max_bodyweight-min_bodyweight)/6
+        else:
+            min_bodyweight = 0
+            max_bodyweight = 0
+            stepsize = 1
     else:
         bodyweight = None
         steps = bodyweight_data = calories = dates = min_bodyweight = max_bodyweight = stepsize = 0
