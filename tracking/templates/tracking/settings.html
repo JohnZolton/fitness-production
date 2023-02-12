@@ -33,17 +33,18 @@
             {% csrf_token %}
             <div>
                 <label>Garmin email:</label>
-                <input type="email" placeholder="" name="email" disabled>
+                <input type="email" placeholder="" name="email">
             </div>
             <div>
               <label>Garmin password:</label>
-            <input type="password" placeholder="" name="password"disabled> 
+            <input type="password" placeholder="" name="password"> 
             </div>
             <div>
                <label>Until how many days ago?</label>
-            <input type="number" name="days"disabled> 
+            <input type="number" name="days"> 
             </div>
             {% if autostep %}
+            <div>Automatic copying currently disabled</div>
             <label for="copyprev">Disable automatic updates</label>
             <input type="checkbox" name="disable"disabled>
             {% else %}
