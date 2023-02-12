@@ -399,9 +399,7 @@ def create_checkout_session(request):
         
         user = User.objects.get(id=request.user.id)
         user.checkout_id = checkout_session.id 
-        print(user.checkout_id)
         user.save()
-        print(checkout_session.url)
     except Exception as e:
         return "Server error", 500
     return HttpResponseRedirect(checkout_session.url)
