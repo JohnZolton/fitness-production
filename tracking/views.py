@@ -412,7 +412,6 @@ def cancel(request):
 
 @csrf_exempt
 def webhook(request):
-    print('webhook fired')
     payload = request.body
     sig_header = request.META['HTTP_STRIPE_SIGNATURE']
     event = None
@@ -428,6 +427,7 @@ def webhook(request):
     except stripe.error.SignatureVerificationError as e:
         # Invalid signature
         return HttpResponse(status=400)
+    print(event['type'])
     if event['type'] == 'checkout.session.completed':
         session = event['data']['object']
         data = json.loads(payload)
