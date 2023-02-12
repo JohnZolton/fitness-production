@@ -76,10 +76,13 @@
                     yAxes: [{
                         display:true,
                         ticks: {
+                            callback: function(value, index, ticks){
+                                return value.toFixed(1)
+                            },
                             min: {{min_bodyweight}},
-                            max: {{max_bodyweight}},
+                            //max: {{max_bodyweight}},
                             stepSize: {{stepsize}},
-                            fontColor: '#ffffff'
+                            fontColor: '#ffffff',
                         }
                     }],
 

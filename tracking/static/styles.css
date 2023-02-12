@@ -9,14 +9,14 @@
   --buttoncolorhover: #f85d98;
 }
 .lightmode{
-  --backgroundcolor: #FFE15D;
+  --backgroundcolor: #DEDACF;
   --textcolor: rgb(0, 0, 0);
-  --bordercolor: #F49D1A;
-  --secondarybackground: #F49D1A;
-  --highlightcolor: #DC3535;
+  --bordercolor: #9A3838;
+  --secondarybackground: #8C6527;
+  --highlightcolor: #292935;
   --selectedcolor: #757575;
-  --buttoncolor: #B01E68;
-  --buttoncolorhover: #b6487f;
+  --buttoncolor: #9A3838;
+  --buttoncolorhover: #493442;
 }
 * { box-sizing: border-box; }
 body {
@@ -177,7 +177,7 @@ tbody tr:last-child {
 }
 
 .table-swap {
-  padding-top: 7px;
+  padding-top: 10px;
 }
 
 .table-copy {

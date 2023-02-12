@@ -13,10 +13,10 @@
   --textcolor: rgb(0, 0, 0);
   --bordercolor: #9A3838;
   --secondarybackground: #8C6527;
-  --highlightcolor: #292935;
+  --highlightcolor: #666A99;
   --selectedcolor: #757575;
-  --buttoncolor: #9A3838;
-  --buttoncolorhover: #493442;
+  --buttoncolor: #412632;
+  --buttoncolorhover: #251C22;
 }
 * { box-sizing: border-box; }
 body {
@@ -177,7 +177,7 @@ tbody tr:last-child {
 }
 
 .table-swap {
-  padding-top: 10px;
+  padding-top: 7px;
 }
 
 .table-copy {
