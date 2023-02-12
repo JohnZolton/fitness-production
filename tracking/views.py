@@ -413,7 +413,9 @@ def cancel(request):
 @csrf_exempt
 def webhook(request):
     payload = request.body
-    sig_header = request.META['HTTP_STRIPE_SIGNATURE']
+    print(payload)
+    
+    sig_header = request.headers['STRIPE_SIGNATURE']
     event = None
     try:
         event = stripe.Webhook.construct_event(
