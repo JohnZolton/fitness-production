@@ -416,6 +416,16 @@ def webhook(request):
         payload = request.body
         event = json.loads(payload)
 
+        if event['type'] == 'checkout.session.completed':
+            session = event['data']['object']
+            data = json.loads(payload)
+            customernumber = data['data']['object']['subscription']
+            user_id = data['data']['object']['client_reference_id']
+            user = User.objects.get(id=user_id)
+            user.is_subscribed = data['plan']['active']
+            user.customernumber = customernumber
+            user.save()
+        return HttpResponse(status=200)
     except ValueError as e:
         # Invalid payload
         return HttpResponse(status=400)
@@ -423,16 +433,6 @@ def webhook(request):
     except stripe.error.SignatureVerificationError as e:
         # Invalid signature
         return HttpResponse(status=400)
-    if event['type'] == 'checkout.session.completed':
-        session = event['data']['object']
-        data = json.loads(payload)
-        customernumber = data['data']['object']['subscription']
-        user_id = data['data']['object']['client_reference_id']
-        user = User.objects.get(id=user_id)
-        user.is_subscribed = data['plan']['active']
-        user.customernumber = customernumber
-        user.save()
-    return HttpResponse(status=200)
 
 def managesubscription(request):
     if request.method == 'GET':
