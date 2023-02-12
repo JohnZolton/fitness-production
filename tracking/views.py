@@ -412,6 +412,7 @@ def cancel(request):
 
 @csrf_exempt
 def webhook(request):
+    print('webhook fired')
     payload = request.body
     sig_header = request.META['HTTP_STRIPE_SIGNATURE']
     event = None
