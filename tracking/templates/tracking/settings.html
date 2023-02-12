@@ -28,7 +28,7 @@
             <button type="submit">Save</button>
         </form>
         <h3>Step Tracking</h3>
-        <div>This feature disabled in production because garmin won't give API key</div>
+        <div>This only works for Garmin watches</div>
         <form action="{% url 'steps' %}" method="post">
             {% csrf_token %}
             <div>

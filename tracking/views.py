@@ -393,13 +393,15 @@ def create_checkout_session(request):
                 },
             ],
             mode='subscription',
-            success_url=YOUR_DOMAIN +
-            '/success',
-            cancel_url=YOUR_DOMAIN + '/cancel',
+            success_url=YOUR_DOMAIN + '/success',
+            cancel_url=YOUR_DOMAIN + '/cancel'
         )
+        
         user = User.objects.get(id=request.user.id)
         user.checkout_id = checkout_session.id 
+        print(user.checkout_id)
         user.save()
+        print(checkout_session.url)
     except Exception as e:
         return "Server error", 500
     return HttpResponseRedirect(checkout_session.url)
