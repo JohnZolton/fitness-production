@@ -419,16 +419,14 @@ def webhook(request):
         print()
         if event['type'] == 'checkout.session.completed':
             session = event['data']['object']
-            print('session: ', session)
             data = json.loads(payload)
-            customernumber = data['data']['object']['subscription']
-            print('customernumber: ', customernumber)
-            user_id = data['data']['object']['client_reference_id']
-            print('user_id: ', user_id)
+            customernumber = data['data']['object']['subscription'] # good
+            user_id = data['data']['object']['client_reference_id'] # good
             user = User.objects.get(id=user_id)
-            user.is_subscribed = data['plan']['active']
-            print(data['plan']['active'])
-            print('subscribed? ', user.is_subscribed)
+            status = event['data']['object']['payment_status']
+            print('status: ', status)
+            if status == 'paid':    
+                user.is_subscribed = True
             user.customernumber = customernumber
             user.save()
         return HttpResponse(status=200)
