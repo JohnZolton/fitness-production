@@ -415,7 +415,8 @@ def webhook(request):
     try:
         payload = request.body
         event = json.loads(payload)
-        print(event['type'])
+        print(event)
+        print()
         if event['type'] == 'checkout.session.completed':
             session = event['data']['object']
             print('session: ', session)
@@ -426,6 +427,7 @@ def webhook(request):
             print('user_id: ', user_id)
             user = User.objects.get(id=user_id)
             user.is_subscribed = data['plan']['active']
+            print(data['plan']['active'])
             print('subscribed? ', user.is_subscribed)
             user.customernumber = customernumber
             user.save()
