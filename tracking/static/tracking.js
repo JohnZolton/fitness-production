@@ -218,7 +218,8 @@ function search(event) {
     let url = 'https://api.nal.usda.gov/fdc/v1/foods/search?api_key='
     let suffix = '&query='
     let food = document.querySelector('#food').value
-    
+    let table = document.getElementById("display-table")
+
     fetch(url + api + suffix + food)
     .then((response) => response.json())
     .then((data) => {
@@ -253,7 +254,8 @@ function search(event) {
             <input class="result_serving" type='number' value='0'>
             <button id='${data['foods'][i]['fdcId']}'>Add</button>`
 
-            document.getElementById("display-table").appendChild(newDiv)
+            table.style.display = 'block'
+            table.appendChild(newDiv)
             document.getElementById(`${data['foods'][i]['fdcId']}`).addEventListener('click', addfood)
         }
         
