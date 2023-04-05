@@ -1,5 +1,5 @@
 {% extends "tracking/layout.html" %}
-
+{% load static %}
 <div>
     {% block body %}
     {% if user.is_authenticated %}
@@ -169,7 +169,11 @@
         <div><canvas id="bodyweight_chart" style="width:300px;;max-height: 250px"></canvas></div>
         <div><canvas id="calories_chart" style="width:300px;max-height:200px"></canvas></div>
     </div>
-    
+    <div>
+        <script src="{% static 'reactfront.js' %}" type="text/babel"></script>
+        <div>React part here:</div>
+        <div id="react-component"></div>
+    </div>
     <div class="flex-child">
         <div class="table-bar">
             <div style="display:flex">
